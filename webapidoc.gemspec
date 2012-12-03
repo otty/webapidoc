@@ -19,8 +19,8 @@ Gem::Specification.new do |s|
   s.files       << "config/webapidoc.yml"
   s.files       << "lib/tasks/webapidoc.rake"
 
-  s.add_dependency('maruku', '~> 0.6.1')
-  s.add_dependency('sass', '~> 3.1.19')
+  s.add_dependency('maruku', '>= 0.6.1')
+  s.add_dependency('sass', '>= 3.1.19')
 
   s.homepage    =
       'http://rubygems.org/gems/webapidoc'
