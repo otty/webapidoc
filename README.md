@@ -4,6 +4,12 @@
 
     gem install webapidoc
 
+## Rails Generator
+
+To copy sample config/webapidoc.yml and two sample files in app/documentation simply run
+
+    rails g webapidoc:install
+
 ## Sample Rake Task
 
     require 'webapidoc'
