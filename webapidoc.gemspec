@@ -12,11 +12,10 @@ Gem::Specification.new do |s|
 
   s.files         = `git ls-files`.split("\n")
 
-  s.require_paths = ["lib", "tasks"]
+  s.require_paths = ["lib"]
 
   s.add_dependency('maruku', '>= 0.6.1')
   s.add_dependency('sass', '>= 3.1.19')
 
-  s.homepage    =
-      'http://rubygems.org/gems/webapidoc'
+  s.homepage = 'http://rubygems.org/gems/webapidoc'
 end

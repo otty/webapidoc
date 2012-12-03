@@ -6,7 +6,7 @@ module WebApiDoc
     railtie_name :webapidoc
 
     rake_tasks do
-      load "lib/tasks/webapidoc.rake"
+      #load "lib/tasks/webapidoc.rake"
     end
   end
 end
