@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files       << "lib/webapidoc/template.html.erb"
   s.files       << "app/documentation/sample.md.erb"
   s.files       << "config/webapidoc.yml"
-  s.files       << "Rakefile"
+  s.files       << "lib/tasks/webapidoc.rake"
 
   s.add_dependency('maruku', '~> 0.6.1')
   s.add_dependency('sass', '~> 3.1.19')

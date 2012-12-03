@@ -18,6 +18,8 @@ require 'fileutils'
 require 'erb'
 require 'sass'
 
+Dir["lib/tasks/**/*.rake"].each { |ext| load ext } if defined?(Rake)
+
 class WebApiDoc
 
   def self.build(data=nil)
