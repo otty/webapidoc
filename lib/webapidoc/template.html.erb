@@ -107,19 +107,10 @@
         editor.on("change", function(e) {
           console.log(e);
 
-          /* validate json */
-          var query = "";
-
-          try {
-            query = JSON.stringify($.parseJSON(editor.getValue()));
-          }
-          catch (err) {
-            return;
-          }
+          var query = editor.getValue();
           var url = "<%= @data['url'] %>";
+
           $.getJSON(url + '&source=' + encodeURIComponent(query)).complete(function (data) {
-
-
             $response.html("<code>" + data.responseText + "</code>");
             hljs.highlightBlock($response[0]);
           });
