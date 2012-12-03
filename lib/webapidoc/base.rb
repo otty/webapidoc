@@ -3,9 +3,11 @@ module Webapidoc
 
   def self.gem_libdir
     t = ["#{File.dirname(File.expand_path($0))}/../lib/#{Webapidoc::NAME}",
-         "#{Gem.dir}/gems/#{Webapidoc::NAME}-#{Webapidoc::VERSION}/lib/#{Webapidoc::NAME}"]
+         "#{Gem.dir}/gems/#{Webapidoc::NAME}-#{Webapidoc::VERSION}/lib/#{Webapidoc::NAME}",
+         "#{File.dirname(__FILE__)}/lib/#{Webapidoc::NAME}"
+        ]
     t.each {|i| return i if File.readable?(i) }
-    raise "both paths are invalid: #{t}"
+    raise "paths are invalid: #{t}"
   end
 
   def self.build
