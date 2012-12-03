@@ -18,7 +18,7 @@ require 'fileutils'
 require 'erb'
 require 'sass'
 
-load "lib/tasks/webapidoc.rake" if defined?(Rake)
+require 'webapidoc/railtie' if defined?(Rails)
 
 class WebApiDoc
 

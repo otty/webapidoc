@@ -1,7 +1,8 @@
 require 'webapidoc'
 
-namespace :webapidoc do
+desc 'build webapi documentation'
 
+namespace :webapidoc do
   task :build do
     WebApiDoc.build({:title => "WebApiDoc"})
   end

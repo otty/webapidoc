@@ -15,9 +15,10 @@ Gem::Specification.new do |s|
   s.files       << "lib/webapidoc/js/jquery.js"
   s.files       << "lib/webapidoc/index.md.erb"
   s.files       << "lib/webapidoc/template.html.erb"
+  s.files       << "lib/webapidoc/railtie.rb"
   s.files       << "app/documentation/sample.md.erb"
   s.files       << "config/webapidoc.yml"
-  s.files       << "lib/tasks/webapidoc.rake"
+  s.files       << "tasks/webapidoc.rake"
 
   s.add_dependency('maruku', '>= 0.6.1')
   s.add_dependency('sass', '>= 3.1.19')
