@@ -73,8 +73,8 @@ module Webapidoc
       # get content info for subsections ( side pane navigation )
       sections = []
       maruku.each_element(:header) do | el |
-        next unless el.meta_priv[:level] == 2
-        sections << el.children[0]
+        next unless el.meta_priv[:level] == 2 or el.meta_priv[:level] == 3
+        sections << {:title => el.children[0], :level => el.meta_priv[:level]}
       end
 
       chapter[:html] = maruku.to_html

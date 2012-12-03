@@ -52,8 +52,8 @@
             <a href="/documentation/<%= chapter[:out] %>"><%= chapter[:name] %></a></li>
 
           <% chapter[:sections].each do |section| %>
-            <li class="nav-item" >
-              <a href="<%= chapter[:out] %>#<%= section.downcase.gsub(/[^\d\w\s]/, "").tr(" ", "_") %>"><%= section %></a>
+            <li class="nav-item level<%= section[:level] %>" >
+              <a href="<%= chapter[:out] %>#<%= section[:title].downcase.gsub(/[^\d\w\s]/, "").tr(" ", "_") %>"><%= section[:title] %></a>
             </li>
 
           <% end %>
