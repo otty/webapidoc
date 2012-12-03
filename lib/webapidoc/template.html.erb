@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Webapidoc for <%= @data[:title] %></title>
+  <title>Webapidoc for <%= @data["title"] %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="in-depth WebAPI documentation for <%= @data[:title] %>">
-  <meta name="author" content="the nice guys from <%= @data[:title] %>">
+  <meta name="description" content="in-depth WebAPI documentation for <%= @data["title"] %>">
+  <meta name="author" content="the nice guys from <%= @data["title"] %>">
 
   <!-- SVG version of grayscale filter: desaturate.svg -->
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -32,12 +32,8 @@
   <script src="/documentation/js/jquery.js"></script>
   <script src="/documentation/js/highlight.js"></script>
 
-  <!-- enable script highlighting -->
-  <script>
-    $(document).ready(function() {
-      hljs.initHighlightingOnLoad();
-    });
-  </script>
+  <!-- Ace Code Editor -->
+  <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 
   <!-- Fav and touch icons -->
   <link rel="shortcut icon" href="favicon.ico">
@@ -78,10 +74,62 @@
   <!--/row-->
 
   <footer>
-    <p>&copy; <%= @data[:title] %> 2012</p>
+    <p>&copy; <%= @data["title"] %> 2012</p>
   </footer>
 
 </div>
+
+  <!-- enable script highlighting -->
+  <script>
+    $(document).ready(function() {
+
+      $("#content > pre > code").each( function (idx) {
+        var $editor = $(this);
+        var id = "editor" + idx;
+        var height = $editor.height();
+
+        $editor.attr("id", id)
+
+        /* build editor */
+        var editor = ace.edit(id);
+        editor.setTheme("ace/theme/tomorrow");
+        editor.getSession().setMode("ace/mode/javascript");
+
+        $editor.css("height", ((height+8) + "px"));
+
+        /* build response field */
+        var rid = "response" + idx;
+        var $response = $('<pre><code>change code to see response...</code></pre>').attr("id", rid).addClass("response");
+
+        $editor.after($response);
+
+        /* bind editor change function for api requests */
+        editor.on("change", function(e) {
+          console.log(e);
+
+          /* validate json */
+          var query = "";
+
+          try {
+            query = JSON.stringify($.parseJSON(editor.getValue()));
+          }
+          catch (err) {
+            return;
+          }
+          var url = "<%= @data['url'] %>";
+          $.getJSON(url + '&source=' + encodeURIComponent(query)).complete(function (data) {
+
+
+            $response.html("<code>" + data.responseText + "</code>");
+            hljs.highlightBlock($response[0]);
+          });
+        });
+
+      })
+
+    });
+
+  </script>
 
 </body>
 </html>

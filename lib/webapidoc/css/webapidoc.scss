@@ -18,7 +18,7 @@
 
 */
 
-$color-text: #333;
+$color-text: #666;
 $color: #148773;
 $color-highlight: #17BCA5;
 $color-code: #f0f0f0;
@@ -67,7 +67,7 @@ table {
 h1, h2, h3, h4, h5, h6 {
   font-family: inherit;
   line-height: normal;
-  font-weight: 400;
+  font-weight: 300;
   color: inherit;
   background-color: transparent;
   border-bottom: none;
@@ -132,7 +132,7 @@ pre {
 body {
 
   font-family: "Lato", Calibri, Arial, sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   color: $color-text;
 
   background: #f9f9f9;
@@ -360,7 +360,7 @@ p {
   font-size: 16px;
   line-height: 1.4;
   text-align: justify;
-  font-weight: 400;
+  font-weight: 300;
   margin-top: 12px;
 }
 
@@ -478,16 +478,50 @@ p.version {
   margin-top: 24px;
 }
 
-/* #Code Styles, from tomorrow style -> http://jmblog.github.com/color-themes-for-google-code-highlightjs
+/* #Code Styles
 ================================================== */
 
-pre {
+/* inline code */
+code {
+  font-family: monospace;
+  background: $color-code;
+  color: #718c00;
+  border-radius: 4px;
+  text-shadow: none;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 2px;
+  padding-left:4px;
+  padding-right:4px;
+}
+
+/* editor */
+.ace_editor {
+  width: 100%;
+  display: block;
+  position: relative;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border:  1px solid #ddd;
+}
+
+/* #Response Code Styles, from tomorrow style -> http://jmblog.github.com/color-themes-for-google-code-highlightjs
+================================================== */
+
+pre.response {
+  padding: 10px;
+
+  border:  1px solid #ddd;
+  background: #F0F0F0;
+  border-radius: 4px;
+  box-shadow: 1px 1px 10px white;
+
   .comment, .title {
     color: #8e908c;
   }
 }
 
-pre {
+pre.response {
   .variable, .attribute, .tag, .regexp, .ruby .constant {
     color: #c82829;
   }
@@ -506,29 +540,29 @@ pre {
   }
 }
 
-pre {
+pre.response {
   .number, .preprocessor, .built_in, .literal, .params, .constant {
     color: #f5871f;
   }
 }
 
-pre {
+pre.response {
   .class, .ruby .class .title, .css .rules .attribute {
     color: #eab700;
   }
 }
 
-pre {
+pre.response {
   .string, .value, .inheritance, .header, .ruby .symbol, .xml .cdata {
     color: #718c00;
   }
 }
 
-pre .css .hexcolor {
+pre.response .css .hexcolor {
   color: #3e999f;
 }
 
-pre {
+pre.response {
   .function {
     color: #4271ae;
   }
@@ -547,21 +581,7 @@ pre {
   }
 }
 
-code {
-  font-family: monospace;
-  background: $color-code;
-  color: #718c00;
-  border-radius: 4px;
-  box-shadow: 1px 1px 10px #fff;
-  text-shadow: none;
-  font-size: 14px;
-  line-height: 20px;
-  padding: 2px;
-  padding-left:4px;
-  padding-right:4px;
-}
-
-pre {
+pre.response {
   margin-top: 12px;
 
   .keyword, .javascript .function {
@@ -570,6 +590,15 @@ pre {
   code {
     display: block;
     padding: 12px;
+    background: $color-code;
+    color: #718c00;
+    border-radius: 4px;
+    text-shadow: none;
+    line-height: 20px;
+
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Droid Sans Mono', 'Consolas', monospace;
+    font-size: 12px;
+
   }
   .coffeescript .javascript, .javascript .xml, .tex .formula {
     opacity: 0.5;
@@ -580,6 +609,8 @@ pre {
     }
   }
 }
+
+
 
 /* #Print Styles
 ================================================== */

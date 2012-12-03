@@ -1,5 +1,6 @@
 title: "WebAPIDoc"
 description: "Static HTML Documentation for JSON APIs"
+url: "http://localhost:3000"
 
 chapters:
   -

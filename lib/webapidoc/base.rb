@@ -8,9 +8,7 @@ module Webapidoc
     raise "both paths are invalid: #{t}"
   end
 
-  def self.build(data=nil)
-
-    @data = data
+  def self.build
 
     publicDir = "public/documentation"
     docDir = "app/documentation"
@@ -18,9 +16,10 @@ module Webapidoc
 
     # get config hash
     configFile = 'config/webapidoc.yml'
-    config = YAML.load_file(configFile).freeze
+    @data = YAML.load_file(configFile).freeze
 
-    puts "building webapidoc for " + config["title"]
+    puts "building webapidoc for " + @data["title"]
+    puts "api url: " + @data["url"]
 
     # clean up
     FileUtils.remove_dir publicDir if File.exists?(publicDir)
@@ -33,7 +32,7 @@ module Webapidoc
     # copy jquery
     FileUtils.copy(libDir + "/js/jquery.js", publicDir + "/js/jquery.js")
 
-    # copy highlighter
+    # copy highlight
     FileUtils.copy(libDir + "/js/highlight.js", publicDir + "/js/highlight.js")
 
     # compile webapidoc style
@@ -45,7 +44,7 @@ module Webapidoc
     @chapters = []
 
     # get chapter info
-    config["chapters"].each_with_index do | chapter, idx|
+    @data["chapters"].each_with_index do | chapter, idx|
 
       inFile = "#{docDir}/#{chapter["file"]}.md"
       outFile = chapter["file"] + ".html"
