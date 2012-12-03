@@ -3,5 +3,8 @@ description: "Static HTML Documentation for JSON APIs"
 
 chapters:
   -
+    file: "index"
+    name: "Index Page"
+  -
     file: "sample"
     name: "Sample Page"

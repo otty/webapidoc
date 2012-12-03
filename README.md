@@ -1,4 +1,4 @@
-# WebApiDoc
+# Webapidoc
 
 ## Installation
 
@@ -11,7 +11,7 @@
     namespace :webapidoc do
 
       task :build do
-        WebApiDoc.build({:title => "WebApiDoc"})
+        Webapidoc.build({:title => "Webapidoc"})
       end
 
     end
