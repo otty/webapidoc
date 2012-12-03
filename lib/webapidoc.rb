@@ -20,10 +20,10 @@ require 'sass'
 
 require 'webapidoc/railtie' if defined?(Rails)
 
-class WebApiDoc
+module WebApiDoc
 
   def self.build(data=nil)
-
+    puts "fu bar!"
     @data = data
 
     publicDir = "public/documentation"
