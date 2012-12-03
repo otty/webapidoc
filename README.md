@@ -1,4 +1,9 @@
-webapidoc
-=========
+# WebApiDoc
 
-Static HTML Documentation for JSON Web APIs.
+## Installation
+
+    gem install webapidoc
+
+## Usage
+
+    require 'webapidoc'
