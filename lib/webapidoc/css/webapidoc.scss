@@ -1,0 +1,636 @@
+/*
+* base styles for a responsive design
+*/
+
+/* Table of Content
+==================================================
+  #CSS Reset Styles
+  #CSS Kickstart Styles
+	#Document Styles
+  #Container Styles
+  #Columns Styles
+  #Row Styles
+  #Group Styles
+  #Clearing Styles
+  #Element Styles
+  #Print Styles
+  #Retina Styles
+
+*/
+
+$color: #148773;
+$color-highlight: #17BCA5;
+$color-code: #f0f0f0;
+
+/* #CSS Reset Styles, v2.0 | 20110126, http://meyerweb.com/eric/tools/css/reset/
+================================================== */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote {
+  &:before, &:after {
+    content: '';
+    content: none; } }
+
+q {
+  &:before, &:after {
+    content: '';
+    content: none; } }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* clear headings */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  line-height: normal;
+  font-weight: 300;
+  color: inherit;
+  background-color: transparent;
+  border-bottom: none;
+}
+
+/* footer */
+
+footer {
+  margin: 0 auto;
+  width: 90%;
+  margin-top: 24px;
+  padding: 8px;
+  border-top: 1px solid #ccc;
+  p {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: gray;
+  }
+}
+
+/* #CSS Kickstart Styles
+================================================== */
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.break {
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+  word-break: break-word;
+
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+
+.ellipsis {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis; /* Required for IE8 */
+  -o-text-overflow: ellipsis; /* Required for Opera */
+  text-overflow: ellipsis;
+}
+
+pre {
+  white-space: pre-wrap;       /* Chrome & Safari */
+  white-space: -moz-pre-wrap;  /* Mozilla since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+/* #Document Styles
+================================================== */
+
+body {
+
+  font-family: "Lato", Calibri, Arial, sans-serif;
+  font-weight: 300;
+  color: #777;
+
+  background: #f9f9f9;
+
+  text-rendering: auto;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-text-size-adjust: 100%;
+
+  zoom: 1;
+
+  margin: 0;
+  padding: 0;
+
+}
+
+/* #Container Styles
+================================================== */
+.container {
+  display: block;
+  position:relative;
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+  text-align:left;
+}
+
+/* #Row Styles
+================================================== */
+
+
+/* the rows. wrap around columns */
+.row {
+  position:relative;
+  display: block;
+  margin:0;
+  padding:0;
+  width:100%;
+}
+.row > .half:nth-child(2n+1) {
+  clear:both;
+}
+.row > .third:nth-child(3n+1) {
+  clear:both;
+}
+.row > .quarter:nth-child(4n+1) {
+  clear:both;
+}
+
+
+/* #Columns Styles
+================================================== */
+
+/* the columns grid magic, based on percentage */
+.column, .columns {
+  position:relative;
+  display: block;
+  float:left;
+  width:100%;
+  margin: 0;
+  padding: 0;
+  text-align:left;
+
+}
+.column.right, .columns.right{
+  text-align:right;
+}
+.column.center, .columns.center{
+  text-align:center;
+  margin: 0 auto;
+  display: block;
+  float:none;
+}
+.twenty.columns{width:100%;}
+.nineteen.columns{width:95%;}
+.eightteen.columns{width:90%;}
+.seventeen.columns{width:85%;}
+.sixteen.columns{width:80%;}
+.fifteen.columns{width:75%;}
+.fourteen.columns{width:70%;}
+.thirteen.columns{width:65%;}
+.twelve.columns{width:60%;}
+.eleven.columns{width:55%;}
+.ten.columns{width:50%;}
+.nine.columns{width:45%;}
+.eight.columns{width:40%;}
+.seven.columns{width:35%;}
+.six.columns{width:30%;}
+.five.columns{width:25%;}
+.four.columns{width:20%;}
+.three.columns{width:15%;}
+.two.columns{width:10%;}
+.one.column{width:5%;}
+
+/* for nested columns, this syntax makes more sense */
+.full.columns{width:100%;}
+.half.columns{width:50%;}
+.third.columns{width:33%;}
+.quarter.columns{width:25%;}
+.two-thirds.columns{width:66%;}
+
+/* offsets */
+
+.offset-by-nineteen{margin-left:95%;}
+.offset-by-eightteen{margin-left:90%;}
+.offset-by-seventeen{margin-left:85%;}
+.offset-by-sixteen{margin-left:80%;}
+.offset-by-fifteen{margin-left:75%;}
+.offset-by-fourteen{margin-left:70%;}
+.offset-by-thirteen{margin-left:65%;}
+.offset-by-twelve{margin-left:60%;}
+.offset-by-eleven{margin-left:55%;}
+.offset-by-ten{margin-left:50%;}
+.offset-by-nine{margin-left:45%;}
+.offset-by-eight{margin-left:40%;}
+.offset-by-seven{margin-left:35%;}
+.offset-by-six{margin-left:30%;}
+.offset-by-five{margin-left:25%;}
+.offset-by-four{margin-left:20%;}
+.offset-by-three{margin-left:15%;}
+.offset-by-two{margin-left:10%;}
+.offset-by-one{margin-left:5%;}
+
+/* for nested columns, this syntax makes more sense */
+.half-offset.columns{margin-left:50%;}
+.third-offset.columns{margin-left:33%;}
+.quarter-offset.columns{margin-left:25%;}
+.two-thirds-offset.columns{margin-left:66%;}
+
+
+
+/* #Group Styles
+================================================== */
+
+/* group rows for sorting, or columns as content. grouping should never add any other styles */
+
+.group {
+  position:relative;
+  display: block;
+  margin:0;
+  padding:0;
+}
+
+
+/* #Clearing
+================================================== */
+
+/* Self Clearing, based on Self Clearing Goodness by Dave Gamache*/
+.container:after { content: "\0020"; display: block; height: 0; clear: both; visibility: hidden; }
+
+/* Use clearfix class on parent to clear nested columns,
+or wrap each row of columns in a <div class="row"> */
+.clearfix:before,
+.clearfix:after,
+.row:before,
+.row:after {
+  content: '\0020';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+.row:after,
+.clearfix:after {
+  clear: both;
+}
+.row,
+.clearfix {
+  zoom: 1;
+}
+/* You can also use a <br class="clear" /> to clear columns */
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+/* #Element Styles
+================================================== */
+
+/* headings */
+
+h1
+{
+  font-size: 21pt;
+  margin-top: 38px;
+  color: $color;
+}
+
+h2 {
+  font-size: 18pt;
+  margin-top: 28px;
+  padding-bottom:4px;
+  border-bottom: 1px solid #ddd;
+}
+
+h3 {
+  font-size: 15pt;
+  margin-top: 28px;
+}
+
+h4 {
+  font-size: 13pt;
+  margin-top: 25px;
+  color: $color;
+}
+
+h5 {
+  font-size: 11pt;
+  margin-top: 22px;
+}
+
+h6 {
+  font-size: 10pt;
+  margin-top: 22px;
+}
+
+/* paragraph */
+
+p {
+  text-shadow: 0 2px 0 rgba(255,255,255,0.7);
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: justify;
+  font-weight: 300;
+  margin-top: 12px;
+}
+
+/* inline links */
+
+p > a, li:not(.nav-header):not(.nav-item) > a {
+  display: inline-block;
+  position: relative;
+  padding-left: 10px;
+
+  text-decoration: none;
+  color: $color;
+  text-shadow: 0 1px 1px rgba(255,255,255,0.9);
+
+  &:hover {
+    color: $color-highlight;
+    &:before {
+      opacity: 0.75;
+    }
+  }
+
+  &:before {
+    content: "\25BA";
+    position: absolute;
+    left: 0px;
+    top: 8px;
+    font-size: 50%;
+    line-height: 1;
+    display: inline-block;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+}
+
+/* lists */
+ol, ul {
+  list-style-type: decimal;
+  margin-top:12px;
+  margin-left:48px;
+  font-size: 16px;
+  line-height: 1.4;
+  li {
+    padding:6px;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+ul {
+  list-style-type: disc;
+}
+
+
+/* #Navigation Styles
+================================================== */
+
+ul.nav-list {
+
+  list-style-type: none;
+
+  margin: 0;
+  margin-top: 42px;
+  text-align: right;
+
+  > li {
+
+    padding: 6px 0px;
+
+    > a {
+      text-decoration: none;
+      color: #777;
+      &:hover {
+        color: $color-highlight;
+      }
+    }
+
+    &.nav-header {
+
+      font-size: 16px;
+
+      margin-top: 12px;
+      border-bottom: 1px solid #ddd;
+
+      > a {
+        color: $color;
+      }
+
+      &:hover {
+
+      }
+
+      &.active {
+
+      }
+    }
+
+    &.nav-item {
+
+      font-size: 13px;
+
+      &:hover {
+
+      }
+    }
+  }
+}
+
+p.version {
+  color: #aaa;
+  font-size: 11px;
+  text-align:right;
+  margin-top: 24px;
+}
+
+/* #Code Styles, from tomorrow style -> http://jmblog.github.com/color-themes-for-google-code-highlightjs
+================================================== */
+
+pre {
+  .comment, .title {
+    color: #8e908c;
+  }
+}
+
+pre {
+  .variable, .attribute, .tag, .regexp, .ruby .constant {
+    color: #c82829;
+  }
+  .xml {
+    .tag .title, .pi, .doctype {
+      color: #c82829;
+    }
+  }
+  .html .doctype {
+    color: #c82829;
+  }
+  .css {
+    .id, .class, .pseudo {
+      color: #c82829;
+    }
+  }
+}
+
+pre {
+  .number, .preprocessor, .built_in, .literal, .params, .constant {
+    color: #f5871f;
+  }
+}
+
+pre {
+  .class, .ruby .class .title, .css .rules .attribute {
+    color: #eab700;
+  }
+}
+
+pre {
+  .string, .value, .inheritance, .header, .ruby .symbol, .xml .cdata {
+    color: #718c00;
+  }
+}
+
+pre .css .hexcolor {
+  color: #3e999f;
+}
+
+pre {
+  .function {
+    color: #4271ae;
+  }
+  .python {
+    .decorator, .title {
+      color: #4271ae;
+    }
+  }
+  .ruby {
+    .function .title, .title .keyword {
+      color: #4271ae;
+    }
+  }
+  .perl .sub, .javascript .title, .coffeescript .title {
+    color: #4271ae;
+  }
+}
+
+code {
+  font-family: monospace;
+  background: $color-code;
+  color: #141414;
+  border-radius: 4px;
+  box-shadow: 1px 1px 10px #fff;
+  text-shadow: none;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 2px;
+  padding-left:4px;
+  padding-right:4px;
+}
+
+pre {
+  margin-top: 12px;
+
+  .keyword, .javascript .function {
+    color: #8959a8;
+  }
+  code {
+    display: block;
+    padding: 12px;
+  }
+  .coffeescript .javascript, .javascript .xml, .tex .formula {
+    opacity: 0.5;
+  }
+  .xml {
+    .javascript, .vbscript, .css, .cdata {
+      opacity: 0.5;
+    }
+  }
+}
+
+/* #Print Styles
+================================================== */
+
+@media print {
+  * {
+    background: none !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+
+  /* Images, vectors and such */
+    filter: Gray();                          /* IE4-8: depreciated */
+    filter: url('desaturate.svg#grayscale'); /* SVG version for IE10, Firefox, Safari 5 and Opera */
+    -webkit-filter: grayscale(100%);         /* Chrome + Safari 6 */
+    -moz-filter: grayscale(100%);            /* Future proof */
+    -ms-filter: grayscale(100%);             /* Future proof */
+    -o-filter: grayscale(100%);              /* Future proof */
+    filter: grayscale(100%);                 /* Future proof or polyfilled */
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  a[href="#"],
+  a[href="javascript:"] {
+    content: "";
+  }
+
+  /* dont show navigation */
+  #nav { display: none; }
+
+  /* fit content */
+  #content { width: 90%; }
+}
+
+/* #Retina Styles
+================================================== */
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2), /* Looks like a bug, so may want to add: */
+only screen and (   -moz-min-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {
+  /* TODO */
+}

@@ -1,0 +1,7 @@
+title: "WebAPIDoc"
+description: "Static HTML Documentation for JSON APIs"
+
+chapters:
+  -
+    file: "sample"
+    name: "Sample Page"

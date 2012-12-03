@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WebApiDoc for <%= @data[:title] %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="in-depth WebAPI documentation for <%= @data[:title] %>">
+  <meta name="author" content="the nice guys from <%= @data[:title] %>">
+
+  <!-- SVG version of grayscale filter: desaturate.svg -->
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <filter id="grayscale">
+      <feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0
+            0.3333 0.3333 0.3333 0 0
+            0.3333 0.3333 0.3333 0 0
+            0  0  0  1 0"/>
+    </filter>
+  </svg>
+
+  <!-- Use a readable font -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Le styles -->
+  <link href="css/webapidoc.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+  <script src="js/html5.js"></script>
+  <![endif]-->
+
+  <!-- Les javascripts -->
+  <script src="js/jquery.js"></script>
+  <script src="js/highlight.js"></script>
+
+  <!-- enable script highlighting -->
+  <script>
+    $(document).ready(function() {
+      hljs.initHighlightingOnLoad();
+    });
+  </script>
+
+  <!-- Fav and touch icons -->
+  <link rel="shortcut icon" href="favicon.ico">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="four columns offset-by-one" id="nav">
+      <ul class="nav-list">
+
+        <li class="nav-header <%= "active" if !@current[:name] %>"><a href="index.html">Home</a></li>
+
+        <% @chapters.each do |chapter| %>
+
+          <li class="nav-header <%= "active" if chapter[:name] == @current[:name] %>">
+            <a href="<%= chapter[:out] %>"><%= chapter[:name] %></a></li>
+
+          <% chapter[:sections].each do |section| %>
+            <li class="nav-item" >
+              <a href="<%= chapter[:out] %>#<%= section.downcase.gsub(/[^\d\w\s]/, "").tr(" ", "_") %>"><%= section %></a>
+            </li>
+
+          <% end %>
+
+        <% end %>
+
+      </ul>
+      <p class="version">
+        Last update: <%= Date.today.strftime("%e. %B %Y ") %>
+      </p>
+    </div>
+    <!--/span-->
+    <div class="thirteen columns offset-by-one" id="content">
+      <%= @html %>
+    </div>
+    <!--/span-->
+  </div>
+  <!--/row-->
+
+  <footer>
+    <p>&copy; <%= @data[:title] %> 2012</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
