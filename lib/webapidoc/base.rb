@@ -29,13 +29,9 @@ module Webapidoc
     # create paths
     FileUtils.mkdir_p publicDir
     FileUtils.mkdir publicDir + "/css"
-    FileUtils.mkdir publicDir + "/js"
 
-    # copy jquery
-    FileUtils.copy(libDir + "/js/jquery.js", publicDir + "/js/jquery.js")
-
-    # copy highlight
-    FileUtils.copy(libDir + "/js/highlight.js", publicDir + "/js/highlight.js")
+    # copy javascripts
+    FileUtils.cp_r(libDir + "/js", publicDir + "/js")
 
     # compile webapidoc style
     sass_filename = libDir + "/css/webapidoc.scss"
