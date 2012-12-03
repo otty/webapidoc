@@ -20,7 +20,7 @@ require 'sass'
 
 module WebApiDoc
 
-  require 'lib/webapidoc/railtie' if defined?(Rails)
+  require 'webapidoc/railtie' if defined?(Rails)
 
   def self.build(data=nil)
 
