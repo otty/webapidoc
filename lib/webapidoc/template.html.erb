@@ -100,12 +100,11 @@
 
         /* build response field */
         var rid = "response" + idx;
-        var $response = $('<pre><code>change code to see response...</code></pre>').attr("id", rid).addClass("response");
+        var $response = $('<pre><code><a href="#">click here</a> or change code to see response... </code></pre>').attr("id", rid).addClass("response");
 
         $editor.after($response);
 
-        /* bind editor change function for api requests */
-        editor.on("change", _.throttle(function(e) {
+        var getResponse = _.throttle(function(e) {
           console.log(e);
 
           var query = editor.getValue();
@@ -115,8 +114,14 @@
             $response.html("<code>" + data.responseText + "</code>");
             hljs.highlightBlock($response[0]);
           });
-        }, 500));
 
+          return false;
+        }, 500);
+
+        /* bind editor change function for api requests */
+        editor.on("change", getResponse);
+
+        $response.find("a").click(getResponse);
       })
 
     });
