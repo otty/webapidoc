@@ -18,6 +18,7 @@
 
 */
 
+$color-text: #333;
 $color: #148773;
 $color-highlight: #17BCA5;
 $color-code: #f0f0f0;
@@ -132,7 +133,7 @@ body {
 
   font-family: "Lato", Calibri, Arial, sans-serif;
   font-weight: 300;
-  color: #777;
+  color: $color-text;
 
   background: #f9f9f9;
 
@@ -434,7 +435,7 @@ ul.nav-list {
 
     > a {
       text-decoration: none;
-      color: #777;
+      color: $color-text;
       &:hover {
         color: $color-highlight;
       }
@@ -443,7 +444,6 @@ ul.nav-list {
     &.nav-header {
 
       font-size: 16px;
-
       margin-top: 12px;
       border-bottom: 1px solid #ddd;
 
