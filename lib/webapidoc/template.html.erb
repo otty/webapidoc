@@ -21,16 +21,16 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 
   <!-- Le styles -->
-  <link href="css/webapidoc.css" rel="stylesheet">
+  <link href="/documentation/css/webapidoc.css" rel="stylesheet">
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
-  <script src="js/html5.js"></script>
+  <script src="/documentation/js/html5.js"></script>
   <![endif]-->
 
   <!-- Les javascripts -->
-  <script src="js/jquery.js"></script>
-  <script src="js/highlight.js"></script>
+  <script src="/documentation/js/jquery.js"></script>
+  <script src="/documentation/js/highlight.js"></script>
 
   <!-- enable script highlighting -->
   <script>
@@ -50,12 +50,10 @@
     <div class="four columns offset-by-one" id="nav">
       <ul class="nav-list">
 
-        <li class="nav-header <%= "active" if !@current[:name] %>"><a href="index.html">Home</a></li>
-
         <% @chapters.each do |chapter| %>
 
           <li class="nav-header <%= "active" if chapter[:name] == @current[:name] %>">
-            <a href="<%= chapter[:out] %>"><%= chapter[:name] %></a></li>
+            <a href="/documentation/<%= chapter[:out] %>"><%= chapter[:name] %></a></li>
 
           <% chapter[:sections].each do |section| %>
             <li class="nav-item" >

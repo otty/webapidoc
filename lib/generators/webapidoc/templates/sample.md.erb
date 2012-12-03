@@ -39,7 +39,7 @@ Support for ERB
 Table of contents generated via ERB:
 
 <% @chapters.each_with_index do |chapter, idx| %>
-<%= idx %>. [<%= chapter[:name] %>](<%= chapter[:out] %>)
+<%= idx %>. [<%= chapter[:name] %>](/documentation/<%= chapter[:out] %>)
 <% end %>
 
 Some code

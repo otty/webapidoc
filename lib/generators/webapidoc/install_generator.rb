@@ -3,15 +3,23 @@ require 'rails/generators'
 require "webapidoc"
 
 module Webapidoc
-  class InstallGenerator < Rails::Generators::Base
-    desc "generate api documentation sample"
+  module Generators
+    class InstallGenerator < Rails::Generators::Base
+      desc "generate api documentation sample"
 
-    def self.source_root
-      @source_root ||= File.join(File.dirname(__FILE__), 'templates')
+      def copy_files
+        source_root ||= File.join(File.dirname(__FILE__), 'templates')
+
+        # create paths
+        FileUtils.mkdir_p "app/documentation"
+
+        # copy files
+        FileUtils.copy(source_root + "/index.md.erb", "app/documentation")
+        FileUtils.copy(source_root + "/sample.md.erb", "app/documentation")
+        FileUtils.copy(source_root + "/webapidoc.yml", "config")
+
+        puts "done"
+      end
     end
-
-    puts "SOURCE ROOT:" + source_root
-    puts "LIB ROOT:" + Webapidoc.gem_libdir
-
   end
 end
