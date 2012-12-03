@@ -18,10 +18,9 @@ require 'fileutils'
 require 'erb'
 require 'sass'
 
-
 module WebApiDoc
 
-  require 'webapidoc/railtie' if defined?(Rails)
+  require 'lib/webapidoc/railtie' if defined?(Rails)
 
   def self.build(data=nil)
 
