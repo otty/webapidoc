@@ -2,11 +2,9 @@ require 'webapidoc'
 require 'rails'
 
 module WebApiDoc
-  class Railtie < Rails::Railtie
-    railtie_name :webapidoc
-
+  class WebApiDocTask < Rails::Railtie
     rake_tasks do
-      #load "lib/tasks/webapidoc.rake"
+      Dir[File.join(File.dirname(__FILE__),'tasks/*.rake')].each { |f| load f }
     end
   end
 end
