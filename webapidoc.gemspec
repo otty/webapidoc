@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'webapidoc'
-  s.version     = '0.0.2'
+  s.version     = '0.0.3'
   s.date        = '2012-12-03'
 
   s.summary     = "Static HTML Documentation for JSON Web APIs."
@@ -18,6 +18,9 @@ Gem::Specification.new do |s|
   s.files       << "app/documentation/sample.md.erb"
   s.files       << "config/webapidoc.yml"
   s.files       << "Rakefile"
+
+  s.add_dependency('maruku', '~> 0.6.1')
+  s.add_dependency('sass', '~> 3.1.19')
 
   s.homepage    =
       'http://rubygems.org/gems/webapidoc'
