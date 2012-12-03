@@ -18,12 +18,13 @@ require 'fileutils'
 require 'erb'
 require 'sass'
 
-require 'webapidoc/railtie' if defined?(Rails)
 
 module WebApiDoc
 
+  require 'webapidoc/railtie' if defined?(Rails)
+
   def self.build(data=nil)
-    puts "fu bar!"
+
     @data = data
 
     publicDir = "public/documentation"
