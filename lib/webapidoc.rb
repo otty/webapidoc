@@ -20,8 +20,6 @@ require 'sass'
 
 module WebApiDoc
 
-  require 'webapidoc/railtie' if defined?(Rails)
-
   def self.build(data=nil)
 
     @data = data

@@ -4,6 +4,14 @@
 
     gem install webapidoc
 
-## Usage
+## Sample Rake Task
 
     require 'webapidoc'
+
+    namespace :webapidoc do
+
+      task :build do
+        WebApiDoc.build({:title => "WebApiDoc"})
+      end
+
+    end

@@ -2,7 +2,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = 'webapidoc'
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.date        = '2012-12-03'
 
   s.summary     = "Static HTML Documentation for JSON Web APIs."
