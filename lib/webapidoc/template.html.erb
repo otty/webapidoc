@@ -31,6 +31,7 @@
   <!-- Les javascripts -->
   <script src="/documentation/js/jquery.js"></script>
   <script src="/documentation/js/highlight.js"></script>
+  <script src="/documentation/js/lodash.min.js"></script>
 
   <!-- Ace Code Editor -->
   <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -104,7 +105,7 @@
         $editor.after($response);
 
         /* bind editor change function for api requests */
-        editor.on("change", function(e) {
+        editor.on("change", _.throttle(function(e) {
           console.log(e);
 
           var query = editor.getValue();
@@ -114,7 +115,7 @@
             $response.html("<code>" + data.responseText + "</code>");
             hljs.highlightBlock($response[0]);
           });
-        });
+        }, 500));
 
       })
 
