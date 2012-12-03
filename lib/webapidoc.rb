@@ -18,7 +18,7 @@ require 'fileutils'
 require 'erb'
 require 'sass'
 
-Dir["lib/tasks/**/*.rake"].each { |ext| load ext } if defined?(Rake)
+load "lib/tasks/webapidoc.rake" if defined?(Rake)
 
 class WebApiDoc
 
