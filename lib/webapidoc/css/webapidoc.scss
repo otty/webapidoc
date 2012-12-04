@@ -431,7 +431,7 @@ ul.nav-list {
 
   > li {
 
-    padding: 4px 0px;
+    padding: 3px 0px;
 
     > a {
       text-decoration: none;
@@ -443,8 +443,8 @@ ul.nav-list {
 
     &.nav-header {
 
-      font-size: 16px;
-      margin-top: 12px;
+      font-size: 20px;
+      margin-top: 16px;
       border-bottom: 1px solid #ddd;
 
       > a {
@@ -465,8 +465,9 @@ ul.nav-list {
       font-size: 13px;
 
       &.level2 {
-        font-weight: 700;
-        padding-top:8px;
+        font-size: 16px;
+        font-weight: 400;
+        padding-top:12px;
       }
       &:hover {
 

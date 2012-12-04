@@ -31,6 +31,7 @@
   <!-- Les javascripts -->
   <script src="/documentation/js/jquery.js"></script>
   <script src="/documentation/js/highlight.js"></script>
+  <script src="/documentation/js/lodash.min.js"></script>
 
   <!-- Ace Code Editor -->
   <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -99,32 +100,28 @@
 
         /* build response field */
         var rid = "response" + idx;
-        var $response = $('<pre><code>change code to see response...</code></pre>').attr("id", rid).addClass("response");
+        var $response = $('<pre><code><a href="#">click here</a> or change code to see response... </code></pre>').attr("id", rid).addClass("response");
 
         $editor.after($response);
 
-        /* bind editor change function for api requests */
-        editor.on("change", function(e) {
+        var getResponse = _.throttle(function(e) {
           console.log(e);
 
-          /* validate json */
-          var query = "";
-
-          try {
-            query = JSON.stringify($.parseJSON(editor.getValue()));
-          }
-          catch (err) {
-            return;
-          }
+          var query = editor.getValue();
           var url = "<%= @data['url'] %>";
+
           $.getJSON(url + '&source=' + encodeURIComponent(query)).complete(function (data) {
-
-
             $response.html("<code>" + data.responseText + "</code>");
             hljs.highlightBlock($response[0]);
           });
-        });
 
+          return false;
+        }, 500);
+
+        /* bind editor change function for api requests */
+        editor.on("change", getResponse);
+
+        $response.find("a").click(getResponse);
       })
 
     });
