@@ -18,17 +18,17 @@
   </svg>
 
   <!-- Le styles -->
-  <link href="/documentation/css/webapidoc.css" rel="stylesheet">
+  <link href="./css/webapidoc.css" rel="stylesheet">
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
-  <script src="/documentation/js/html5.js"></script>
+  <script src="./js/html5.js"></script>
   <![endif]-->
 
   <!-- Les javascripts -->
-  <script src="/documentation/js/jquery.js"></script>
-  <script src="/documentation/js/highlight.js"></script>
-  <script src="/documentation/js/lodash.min.js"></script>
+  <script src="./js/jquery.js"></script>
+  <script src="./js/highlight.js"></script>
+  <script src="./js/lodash.min.js"></script>
 
   <!-- Ace Code Editor -->
   <% if @data["url"].present? %>
@@ -51,7 +51,7 @@
 
         <% @sections.each do |section| %>
             <li class="nav-item level<%= section[:level] %>" >
-              <a href="/documentation/<%= section[:file]%>.html/#<%= section[:anchor]%>"><%= section[:title] %></a>
+              <a href="./<%= section[:file]%>.html#<%= section[:anchor]%>"><%= section[:title] %></a>
             </li>
         <% end %>
 
