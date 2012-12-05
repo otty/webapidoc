@@ -22,7 +22,8 @@ module Webapidoc
     end
 
     # read partials contents and inject it
-    File.open(inFile, 'r').read
+    ERB.new(File.open(inFile, 'r').read).result(binding)
+
   end
 
   def self.libDir
