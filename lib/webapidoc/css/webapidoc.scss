@@ -604,6 +604,13 @@ pre.response {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Droid Sans Mono', 'Consolas', monospace;
     font-size: 12px;
 
+    > a {
+      color: $color-text;
+      &:hover {
+        color: $color-highlight;
+      }
+    }
+
   }
   .coffeescript .javascript, .javascript .xml, .tex .formula {
     opacity: 0.5;
