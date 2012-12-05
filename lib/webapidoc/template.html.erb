@@ -34,9 +34,10 @@
   <script src="/documentation/js/lodash.min.js"></script>
 
   <!-- Ace Code Editor -->
-  <% if @data["url"].present?: %>
+  <% if @data["url"].present? %>
     <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <% end %>
+
   <!-- Fav and touch icons -->
   <link rel="shortcut icon" href="favicon.ico">
 </head>
@@ -86,7 +87,7 @@
     $(document).ready(function() {
 
 
-      <% if @data["url"].present?: %>
+      <% if @data["url"].present? %>
         $("#content > pre > code").each( function (idx) {
           var $editor = $(this);
           var id = "editor" + idx;

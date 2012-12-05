@@ -16,7 +16,7 @@ module Webapidoc
     @data = YAML.load_file(configFile).freeze
 
     puts "building webapidoc for " + @data["title"]
-    puts "api url: " + @data["url"]
+    puts "api url: " + @data["url"] if @data["url"]
 
     # clean up
     FileUtils.remove_dir publicDir if File.exists?(publicDir)
