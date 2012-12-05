@@ -6,7 +6,7 @@
 
 ## Rails Generator
 
-To copy sample config/webapidoc.yml and two sample files in app/documentation simply run
+To copy sample config/webapidoc.yml and sample files in app/documentation simply run
 
     rails g webapidoc:install
 
@@ -21,3 +21,15 @@ To copy sample config/webapidoc.yml and two sample files in app/documentation si
       end
 
     end
+
+## Provide URL for live API Querys
+
+set url option to a valid JSON API URL to use live querys
+
+
+# Rendering Partials
+
+like in rails:
+
+    <%= partial :welcome_message %>
+
