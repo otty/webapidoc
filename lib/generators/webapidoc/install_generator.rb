@@ -14,8 +14,8 @@ module Webapidoc
         FileUtils.mkdir_p "app/documentation"
 
         # copy files
-        FileUtils.copy(source_root + "/index.md.erb", "app/documentation")
-        FileUtils.copy(source_root + "/sample.md.erb", "app/documentation")
+        FileUtils.copy(source_root + "/documentation.md.erb", "app/documentation")
+        FileUtils.copy(source_root + "/_partial.md.erb", "app/documentation")
         FileUtils.copy(source_root + "/webapidoc.yml", "config")
 
         puts "done"

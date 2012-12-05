@@ -49,9 +49,28 @@ blockquote, q {
   quotes: none; }
 
 blockquote {
+
+  font-family: serif;
+  font-style: italic;
+  margin: 0.25em 0;
+  padding: 0.25em 40px;
+  line-height: 1.45;
+  position: relative;
+
   &:before, &:after {
     content: '';
-    content: none; } }
+    content: none; }
+
+  &:before {
+    display: block;
+    content: "\201C";
+    font-size: 56px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    color: #7a7a7a;
+  }
+}
 
 q {
   &:before, &:after {
@@ -131,7 +150,7 @@ pre {
 
 body {
 
-  font-family: "Lato", Calibri, Arial, sans-serif;
+  font-family: sans-serif;
   font-weight: 300;
   color: $color-text;
 
@@ -323,13 +342,14 @@ h1
   font-size: 21pt;
   margin-top: 38px;
   color: $color;
+  padding-bottom:4px;
+  border-bottom: 1px solid #ddd;
 }
 
 h2 {
   font-size: 18pt;
   margin-top: 28px;
-  padding-bottom:4px;
-  border-bottom: 1px solid #ddd;
+  font-weight: 400;
 }
 
 h3 {
@@ -420,57 +440,63 @@ ul {
 
 /* #Navigation Styles
 ================================================== */
+#nav {
+  div.title {
+    text-align:right;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    font-size:26px;
+    line-height:1.4;
+    opacity: 0.3;
+    font-weight: 300;
+    color: $color;
 
-ul.nav-list {
+  }
+  ul.nav-list {
 
-  list-style-type: none;
+    list-style-type: none;
 
-  margin: 0;
-  margin-top: 42px;
-  text-align: right;
+    margin: 0;
+    margin-top: 42px;
+    text-align: right;
 
-  > li {
+    > li {
 
-    padding: 3px 0px;
-
-    > a {
-      text-decoration: none;
-      color: $color-text;
-      &:hover {
-        color: $color-highlight;
-      }
-    }
-
-    &.nav-header {
-
-      font-size: 20px;
-      margin-top: 16px;
-      border-bottom: 1px solid #ddd;
+      padding: 3px 0px;
 
       > a {
-        color: $color;
+        text-decoration: none;
+        color: $color-text;
+        &:hover {
+          color: $color-highlight;
+        }
       }
 
-      &:hover {
+      &.nav-item {
 
-      }
+        &.level1 {
+          font-size: 20px;
+          font-weight: 400;
+          padding-top:16px;
+          border-bottom: 1px solid #ddd;
 
-      &.active {
+          > a {color: $color;}
+        }
 
-      }
-    }
+        &.level2 {
+          font-size: 16px;
+          font-weight: 400;
+          padding-top:12px;
+        }
 
-    &.nav-item {
+        &.level3 {
+          font-size: 14px;
+          font-weight: 300;
+          padding-top:12px;
+        }
+        &:hover {
 
-      font-size: 13px;
-
-      &.level2 {
-        font-size: 16px;
-        font-weight: 400;
-        padding-top:12px;
-      }
-      &:hover {
-
+        }
       }
     }
   }
@@ -498,8 +524,11 @@ code {
   padding: 2px;
   padding-left:4px;
   padding-right:4px;
-}
 
+}
+pre > code {
+  display: block;
+}
 /* editor */
 .ace_editor {
   width: 100%;
@@ -601,7 +630,7 @@ pre.response {
     text-shadow: none;
     line-height: 20px;
 
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Droid Sans Mono', 'Consolas', monospace;
+    font-family: monospace;
     font-size: 12px;
 
     > a {

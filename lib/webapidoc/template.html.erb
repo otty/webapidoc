@@ -17,9 +17,6 @@
     </filter>
   </svg>
 
-  <!-- Use a readable font -->
-  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-
   <!-- Le styles -->
   <link href="/documentation/css/webapidoc.css" rel="stylesheet">
 
@@ -47,20 +44,15 @@
 <div class="container">
   <div class="row">
     <div class="four columns offset-by-one" id="nav">
+      <div class="title">
+        <%= @data["title"] %> Documentation
+      </div>
       <ul class="nav-list">
 
-        <% @chapters.each do |chapter| %>
-
-          <li class="nav-header <%= "active" if chapter[:name] == @current[:name] %>">
-            <a href="/documentation/<%= chapter[:out] %>"><%= chapter[:name] %></a></li>
-
-          <% chapter[:sections].each do |section| %>
+        <% @sections.each do |section| %>
             <li class="nav-item level<%= section[:level] %>" >
-              <a href="<%= chapter[:out] %>#<%= section[:title].downcase.gsub(/[^\d\w\s]/, "").tr(" ", "_") %>"><%= section[:title] %></a>
+              <a href="/documentation/<%= section[:file]%>.html/#<%= section[:anchor]%>"><%= section[:title] %></a>
             </li>
-
-          <% end %>
-
         <% end %>
 
       </ul>

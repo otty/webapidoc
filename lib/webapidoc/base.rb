@@ -1,90 +1,117 @@
 
 module Webapidoc
 
-  def self.gem_libdir
+  @@docDir = "app/documentation"
+  @@publicDir = "public/documentation"
+  @@configFile = 'config/webapidoc.yml'
+
+  def self.partial(template)
+    # rails like _ templates, simple injection
+    template = template.to_s.split('/')
+    template[ template.length - 1 ] = '_' + template[ template.length - 1 ]
+    template = template.join('/')
+    inFile = @@docDir + "/" + template + ".md"
+
+    if !File.exists?(inFile)
+      inFile = inFile + ".erb"
+    end
+
+    if !File.exists?(inFile)
+      puts "partial not found: #{inFile}"
+      return
+    end
+
+    # read partials contents and inject it
+    File.open(inFile, 'r').read
+  end
+
+  def self.libDir
     File.dirname(__FILE__)
   end
 
   def self.build
-
-    publicDir = "public/documentation"
-    docDir = "app/documentation"
-    libDir = gem_libdir
-
     # get config hash
-    configFile = 'config/webapidoc.yml'
-    @data = YAML.load_file(configFile).freeze
+    @data = YAML.load_file(@@configFile).freeze
 
     puts "building webapidoc for " + @data["title"]
     puts "api url: " + @data["url"] if @data["url"]
 
     # clean up
-    FileUtils.remove_dir publicDir if File.exists?(publicDir)
+    FileUtils.remove_dir @@publicDir if File.exists?(@@publicDir)
 
-    # create paths
-    FileUtils.mkdir_p publicDir
-    FileUtils.mkdir publicDir + "/css"
+    # create @s
+    FileUtils.mkdir_p @@publicDir
+    FileUtils.mkdir @@publicDir + "/css"
 
     # copy javascripts
-    FileUtils.cp_r(libDir + "/js", publicDir + "/js")
+    FileUtils.cp_r(libDir + "/js", @@publicDir + "/js")
 
     # compile webapidoc style
     sass_filename = libDir + "/css/webapidoc.scss"
     css = Sass::Engine.for_file(sass_filename, {:style => :compressed}).render
-    File.open(publicDir + "/css/webapidoc.css", "wb") {|f| f.write(css) }
+    File.open(@@publicDir + "/css/webapidoc.css", "wb") {|f| f.write(css) }
 
-    # parse chapters and create html from md
-    @chapters = []
-
-    # get chapter info
-    @data["chapters"].each_with_index do | chapter, idx|
-
-      inFile = "#{docDir}/#{chapter["file"]}.md"
-      outFile = chapter["file"] + ".html"
-
-      if File.exists?(inFile + ".erb" )
-        inFile = inFile + ".erb"
-      end
-
-      if File.exists?(inFile)
-        contents = File.open(inFile, 'r').read
-      else
-        puts "file not found: #{inFile}"
-        next
-      end
-
-      @chapters << { :name => chapter["name"],  :out => outFile, :in => inFile}
+    # open index file
+    inFile = "#{@@docDir}/documentation.md"
+    # look for erb
+    if !File.exists?(inFile)
+      inFile = inFile + ".erb"
+    end
+    # not found?
+    if !File.exists?(inFile)
+      puts "documentation not found: #{inFile}"
+      exit 0
     end
 
-    @chapters.each_with_index do | chapter, idx|
+    # open file
+    contents = ERB.new(File.open(inFile, 'r').read).result(binding)
+    maruku = Maruku.new(contents)
 
-      contents = ERB.new(File.open(chapter[:in], 'r').read).result(binding)
-      maruku = Maruku.new(contents)
+    # build html
+    html = Nokogiri::HTML(maruku.to_html)
 
-      # get content info for subsections ( side pane navigation )
-      sections = []
-      maruku.each_element(:header) do | el |
-        next unless el.meta_priv[:level] == 2 or el.meta_priv[:level] == 3
-        sections << {:title => el.children[0], :level => el.meta_priv[:level]}
+    # build chapters
+    @chapters = []
+    @chapters = html.xpath('//body').children.inject([]) do |chapters_hash, child|
+      # build chapter
+      if child.name == 'h1'
+        title = child.inner_text
+        anchor = title.downcase.gsub(/[^\d\w\s]/, "").tr(" ", "_")
+        chapters_hash << { :title => title, :contents => '', :file => anchor}
       end
 
-      chapter[:html] = maruku.to_html
-      chapter[:sections] = sections
+      next chapters_hash if chapters_hash.empty?
+      chapters_hash.last[:contents] << child.to_xhtml
+      chapters_hash
+    end
 
+    # build sections
+    @sections = []
+    cidx = -1
+    html.xpath('//body').children.inject([]) do |chapters_hash, child|
+      # store sections for navigation
+      if child.name == 'h1' or child.name == 'h2' or child.name == 'h3'
+        title = child.inner_text
+        anchor = title.downcase.gsub(/[^\d\w\s]/, "").tr(" ", "_")
+        level = child.name[-1, 1]
+        cidx = cidx + 1 if level == "1"
+        next unless @chapters[cidx].present?
+        file = @chapters[cidx][:file]
+        @sections << {:title => title, :file => file, :anchor => anchor, :level => level}
+      end
     end
 
     # open template
     template = "#{libDir}/template.html.erb"
 
-    # build chapter files
-    @chapters.each do | chapter |
-
-      # bindings
-      @html = chapter[:html]
-      @current = chapter
-      puts "building #{chapter[:name]}"
+    # write each chapter to file
+    @chapters.each_with_index do | chapter, idx |
+      outFile = "#{@@publicDir}/#{chapter[:file]}.html"
+      puts idx.to_s + ":" + chapter[:title] + " > " + outFile
+      # convert md to html
+      @html = chapter[:contents]
       # write it
-      File.open("#{publicDir}/#{chapter[:out]}", 'w') { |file| file.write(ERB.new(File.open(template, 'r').read).result(binding)) }
+      File.open(outFile, 'w') { |file| file.write(ERB.new(File.open(template, 'r').read).result(binding)) }
     end
   end
 end
