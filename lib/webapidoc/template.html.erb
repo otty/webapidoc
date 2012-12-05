@@ -34,8 +34,9 @@
   <script src="/documentation/js/lodash.min.js"></script>
 
   <!-- Ace Code Editor -->
-  <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-
+  <% if @data["url"].present?: %>
+    <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+  <% end %>
   <!-- Fav and touch icons -->
   <link rel="shortcut icon" href="favicon.ico">
 </head>
@@ -84,46 +85,48 @@
   <script>
     $(document).ready(function() {
 
-      $("#content > pre > code").each( function (idx) {
-        var $editor = $(this);
-        var id = "editor" + idx;
-        var height = $editor.height();
 
-        $editor.attr("id", id)
+      <% if @data["url"].present?: %>
+        $("#content > pre > code").each( function (idx) {
+          var $editor = $(this);
+          var id = "editor" + idx;
+          var height = $editor.height();
 
-        /* build editor */
-        var editor = ace.edit(id);
-        editor.setTheme("ace/theme/tomorrow");
-        editor.getSession().setMode("ace/mode/javascript");
+          $editor.attr("id", id)
 
-        $editor.css("height", ((height+8) + "px"));
+          /* build editor */
+          var editor = ace.edit(id);
+          editor.setTheme("ace/theme/tomorrow");
+          editor.getSession().setMode("ace/mode/javascript");
 
-        /* build response field */
-        var rid = "response" + idx;
-        var $response = $('<pre><code><a href="#">click here</a> or change code to see response... </code></pre>').attr("id", rid).addClass("response");
+          $editor.css("height", ((height+8) + "px"));
 
-        $editor.after($response);
+          /* build response field */
+          var rid = "response" + idx;
+          var $response = $('<pre><code><a href="#">click here</a> or change code to see response... </code></pre>').attr("id", rid).addClass("response");
 
-        var getResponse = _.throttle(function(e) {
-          console.log(e);
+          $editor.after($response);
 
-          var query = editor.getValue();
-          var url = "<%= @data['url'] %>";
+          var getResponse = _.throttle(function(e) {
+            console.log(e);
 
-          $.getJSON(url + '&source=' + encodeURIComponent(query)).complete(function (data) {
-            $response.html("<code>" + data.responseText + "</code>");
-            hljs.highlightBlock($response[0]);
-          });
+            var query = editor.getValue();
+            var url = "<%= @data['url'] %>";
 
-          return false;
-        }, 500);
+            $.getJSON(url + '&source=' + encodeURIComponent(query)).complete(function (data) {
+              $response.html("<code>" + data.responseText + "</code>");
+              hljs.highlightBlock($response[0]);
+            });
 
-        /* bind editor change function for api requests */
-        editor.on("change", getResponse);
+            return false;
+          }, 500);
 
-        $response.find("a").click(getResponse);
-      })
+          /* bind editor change function for api requests */
+          editor.on("change", getResponse);
 
+          $response.find("a").click(getResponse);
+        })
+      <% end %>
     });
 
   </script>
