@@ -100,7 +100,7 @@
 
           $editor.after($response);
 
-          var getResponse = _.throttle(function(e) {
+          var getResponse = _.debounce(function(e) {
             console.log(e);
 
             var query = editor.getValue();
@@ -112,7 +112,7 @@
             });
 
             return false;
-          }, 500);
+          }, 300);
 
           /* bind editor change function for api requests */
           editor.on("change", getResponse);
