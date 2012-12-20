@@ -43,9 +43,12 @@
 
 <div class="container">
   <div class="row">
-    <div class="four columns offset-by-one" id="nav">
+    <div class="five columns" id="nav">
       <div class="title">
-        <%= @data["title"] %> Documentation
+        <%= @data["title"] %>
+      </div>
+      <div class="description">
+        <%= @data["description"] %>
       </div>
       <ul class="nav-list">
 
@@ -61,16 +64,18 @@
       </p>
     </div>
     <!--/span-->
-    <div class="thirteen columns offset-by-one" id="content">
+    <div class="fifteen columns" id="content">
       <%= @html %>
+
+      <footer>
+        <p>&copy; <%= @data["title"] %> 2012</p>
+      </footer>
+
     </div>
     <!--/span-->
   </div>
   <!--/row-->
 
-  <footer>
-    <p>&copy; <%= @data["title"] %> 2012</p>
-  </footer>
 
 </div>
 
