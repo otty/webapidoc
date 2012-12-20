@@ -437,6 +437,9 @@ ul {
   background:transparent;
   padding: 16px;
 
+  min-height: 100%;
+  position: relative;
+
   div.title {
     text-align:center;
     margin-top: 24px;
@@ -530,6 +533,10 @@ p.version {
   padding-left: 40px;
   padding-right:40px;
   box-shadow: 0px 0px 60px #AAA;
+
+  min-height: 100%;
+  position: absolute;
+  left: 25%;
 }
 /* #Code Styles
 ================================================== */
