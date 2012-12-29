@@ -653,7 +653,7 @@ pre.response {
   code {
     display: block;
     padding: 12px;
-    background: $color-code;
+    background-color: $color-code;
     color: #718c00;
     border-radius: 4px;
     text-shadow: none;
@@ -662,14 +662,22 @@ pre.response {
     font-family: monospace;
     font-size: 12px;
 
+    opacity: 1;
+
     > a {
       color: $color-text;
       &:hover {
         color: $color-highlight;
       }
     }
-
   }
+  &.loading{
+    code {
+      opacity: 0.5;
+      color: gray !important;
+    }
+  }
+
   .coffeescript .javascript, .javascript .xml, .tex .formula {
     opacity: 0.5;
   }

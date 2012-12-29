@@ -109,9 +109,15 @@
             var query = editor.getValue();
             var url = "<%= @data['url'] %>";
 
+
+            /* give some visual feedback */
+            $response.addClass("loading");
+
             $.getJSON(url + '&source=' + encodeURIComponent(query)).complete(function (data) {
               $response.html("<code>" + data.responseText + "</code>");
               hljs.highlightBlock($response[0]);
+
+              $response.removeClass("loading");
             });
 
             return false;
@@ -124,11 +130,16 @@
 
           $response.find("a").click(function(e){
 
+
               // make sure to stop click event here
               e.preventDefault();
 
               // get the response
-              getResponse();
+              if($response.hasClass("loading")){
+                  // do not request while waiting for server
+              }else {
+                  getResponse();
+              }
 
               return false;
 
