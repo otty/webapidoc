@@ -101,13 +101,11 @@
 
           /* build response field */
           var rid = "response" + idx;
-          var $response = $('<pre><code><a href="#">click here</a> or change code to see response... </code></pre>').attr("id", rid).addClass("response");
+          var $response = $('<pre><code><a href="">click here</a> or change code to see response... </code></pre>').attr("id", rid).addClass("response");
 
           $editor.after($response);
 
           var getResponse = _.debounce(function(e) {
-            console.log(e);
-
             var query = editor.getValue();
             var url = "<%= @data['url'] %>";
 
@@ -122,7 +120,17 @@
           /* bind editor change function for api requests */
           editor.on("change", getResponse);
 
-          $response.find("a").click(getResponse);
+          $response.find("a").click(function(e){
+
+              // make sure to stop click event here
+              e.preventDefault();
+
+              // get the response
+              getResponse();
+
+              return false;
+
+          });
         })
       <% end %>
     });
