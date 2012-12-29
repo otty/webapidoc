@@ -105,7 +105,7 @@
 
           $editor.after($response);
 
-          var getResponse = _.debounce(function(e) {
+          var getResponse = function(e) {
             var query = editor.getValue();
             var url = "<%= @data['url'] %>";
 
@@ -115,10 +115,12 @@
             });
 
             return false;
-          }, 300);
+          };
+
+           var getResponseDebounced = _.debounce(getResponse, 300);
 
           /* bind editor change function for api requests */
-          editor.on("change", getResponse);
+          editor.on("change", getResponseDebounced);
 
           $response.find("a").click(function(e){
 
