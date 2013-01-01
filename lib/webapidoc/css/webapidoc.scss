@@ -332,42 +332,48 @@ or wrap each row of columns in a <div class="row"> */
 h1
 {
   font-size: 21pt;
-  margin-top: 38px;
+  padding-top: 38px;
   color: $color;
-  padding-bottom:4px;
+  padding-bottom: 14px;
   border-bottom: 1px solid #ddd;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-bottom: 24px;
 }
 
 h2 {
   font-size: 16pt;
   padding-top: 28px;
+  margin-bottom: 12px;
   padding-bottom: 14px;
-  font-weight: 400;
+  margin-left: 24px;
+  margin-right: 24px;
+  font-weight: 300;
+  color: $color;
+  border-bottom: 1px solid #d4d4d4;
 }
 
 h3 {
+  position: relative;
   font-size: 12pt;
   padding-top: 28px;
   padding-left: 24px;
-  font-weight: 400;
-}
-/*
-h4 {
-  font-size: 13pt;
-  padding-top: 25px;
-  color: $color;
-}
+  font-weight: 300;
 
-h5 {
-  font-size: 11pt;
-  padding-top: 22px;
-}
 
-h6 {
-  font-size: 10pt;
-  padding-top: 22px;
+  &:before {
+    content: "\25BA";
+    position: absolute;
+    left: 10px;
+    top: 33px;
+    font-size: 50%;
+    line-height: 1;
+    display: inline-block;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
 }
-*/
 
 /* paragraph */
 
@@ -389,9 +395,10 @@ p > a, li:not(.nav-header):not(.nav-item) > a {
   position: relative;
   padding-left: 10px;
 
-  text-decoration: none;
-  color: #000;
+  text-decoration: underline;
   text-shadow: 0 1px 1px rgba(255,255,255,0.9);
+
+  color: $color;
 
   &:hover {
     color: $color-highlight;
@@ -459,9 +466,9 @@ ul {
   }
   div.description {
     text-align: center;
-    color: #333;
+    color: $color;
     padding-bottom: 12px;
-    border-bottom: 4px solid #ccc;
+    border-bottom: 1px solid #d4d4d4;
   }
   ul.nav-list {
 
@@ -483,7 +490,7 @@ ul {
             font-family:$sans;
             font-size:16px;
             color:#148773;
-            font-weight: 600;
+            font-weight: 300;
           }
         }
 
@@ -492,9 +499,9 @@ ul {
 
           > a {
             font-family:$sans;
-            font-size:16px;
+            font-size:14px;
             color:#148773;
-            font-weight: 400;
+            font-weight: 300;
           }
 
         }
@@ -505,9 +512,9 @@ ul {
           > a {
             position:relative;
             font-family:$sans;
-            font-size:14px;
-            color:#000000;
-            font-weight: 400;
+            font-size:12px;
+            color: $color;
+            font-weight: 300;
             padding-left:12px;
 
             &:before {
