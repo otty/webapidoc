@@ -32,7 +32,7 @@
 
   <!-- Ace Code Editor -->
   <% if @data["url"].present? %>
-    <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+      <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <% end %>
 
   <!-- Fav and touch icons -->
@@ -53,8 +53,8 @@
       <ul class="nav-list">
 
         <% @sections.each do |section| %>
-            <li class="nav-item level<%= section[:level] %>" >
-              <a href="./<%= section[:file]%>.html#<%= section[:anchor]%>"><%= section[:title] %></a>
+            <li class="nav-item level<%= section[:level] %>">
+              <a href="./<%= section[:file] %>.html#<%= section[:anchor] %>"><%= section[:title] %></a>
             </li>
         <% end %>
 
@@ -79,76 +79,87 @@
 
 </div>
 
-  <!-- enable script highlighting -->
-  <script>
-    $(document).ready(function() {
+<!-- enable script highlighting -->
+<script>
+    $(document).ready(function () {
+
+        <% if @data["url"].present? %>
+        $("#content > pre > code").each(function (idx) {
 
 
-      <% if @data["url"].present? %>
-        $("#content > pre > code").each( function (idx) {
-          var $editor = $(this);
-          var id = "editor" + idx;
-          var height = $editor.height();
+            var $editor = $(this);
+            var id = "editor" + idx;
+            var height = $editor.height();
+            var noResponse = false;
 
-          $editor.attr("id", id)
+            $editor.attr("id", id)
 
-          /* build editor */
-          var editor = ace.edit(id);
-          editor.setTheme("ace/theme/tomorrow");
-          editor.getSession().setMode("ace/mode/javascript");
+            /* check for skipping live query? */
+            if ($editor.text().indexOf("#SKIPQUERY") >= 0) {
+                $editor.html($editor.html().replace("#SKIPQUERY",""))
+                noResponse = true;
+            }
 
-          $editor.css("height", ((height+8) + "px"));
+            /* build editor */
+            var editor = ace.edit(id);
+            editor.setTheme("ace/theme/tomorrow");
+            editor.getSession().setMode("ace/mode/javascript");
 
-          /* build response field */
-          var rid = "response" + idx;
-          var $response = $('<pre><code><a href="">Hier klicken</a> oder Code ändern für Live-Query... </code></pre>').attr("id", rid).addClass("response");
+            $editor.css("height", ((height + 8) + "px"));
 
-          $editor.after($response);
+            if (noResponse == true)
+                return;
 
-          var getResponse = function(e) {
-            var query = editor.getValue();
-            var url = "<%= @data['url'] %>";
+            /* build response field */
+            var rid = "response" + idx;
+            var $response = $('<pre><code><a href="">Hier klicken</a> oder Code ändern für Live-Query... </code></pre>').attr("id", rid).addClass("response");
+
+            $editor.after($response);
+
+            var getResponse = function (e) {
+                var query = editor.getValue();
+                var url = "<%= @data['url'] %>";
 
 
-            /* give some visual feedback */
-            $response.addClass("loading");
+                /* give some visual feedback */
+                $response.addClass("loading");
 
-            $.getJSON(url + '&source=' + encodeURIComponent(query)).complete(function (data) {
-              $response.html("<code>" + data.responseText + "</code>");
-              hljs.highlightBlock($response[0]);
+                $.getJSON(url + '&source=' + encodeURIComponent(query)).complete(function (data) {
+                    $response.html("<code>" + data.responseText + "</code>");
+                    hljs.highlightBlock($response[0]);
 
-              $response.removeClass("loading");
+                    $response.removeClass("loading");
+                });
+
+                return false;
+            };
+
+            var getResponseDebounced = _.debounce(getResponse, 300);
+
+            /* bind editor change function for api requests */
+            editor.on("change", getResponseDebounced);
+
+            $response.find("a").click(function (e) {
+
+
+                // make sure to stop click event here
+                e.preventDefault();
+
+                // get the response
+                if ($response.hasClass("loading")) {
+                    // do not request while waiting for server
+                } else {
+                    getResponse();
+                }
+
+                return false;
+
             });
-
-            return false;
-          };
-
-           var getResponseDebounced = _.debounce(getResponse, 300);
-
-          /* bind editor change function for api requests */
-          editor.on("change", getResponseDebounced);
-
-          $response.find("a").click(function(e){
-
-
-              // make sure to stop click event here
-              e.preventDefault();
-
-              // get the response
-              if($response.hasClass("loading")){
-                  // do not request while waiting for server
-              }else {
-                  getResponse();
-              }
-
-              return false;
-
-          });
         })
-      <% end %>
+        <% end %>
     });
 
-  </script>
+</script>
 
 </body>
 </html>
