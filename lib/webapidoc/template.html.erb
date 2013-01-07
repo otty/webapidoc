@@ -120,7 +120,6 @@
                 var query = editor.getValue();
                 var url = "<%= @data['host'] %>/<%= @data['params'] %>";
 
-
                 /* give some visual feedback */
                 $response.addClass("loading");
 
@@ -157,6 +156,91 @@
             });
         })
         <% end %>
+
+
+        <% if @data["juvia"].present? %>
+
+        var $current = null;
+
+        function makeQueryString(options) {
+            var key, params = [];
+            for (key in options) {
+                params.push(encodeURIComponent(key) + '=' + encodeURIComponent(options[key]));
+            }
+            return params.join('&');
+        }
+
+        function makeApiUrl(options) {
+            // Makes sure that each call generates a unique URL, otherwise
+            // the browser may not actually perform the request.
+            if (!('_juviaRequestCounter' in window)) {
+                window._juviaRequestCounter = 0;
+            }
+
+            var result = '<%= @data['juvia'] %>/api/show_topic.js' + '?_c=' + window._juviaRequestCounter + '&' + makeQueryString(options);
+            window._juviaRequestCounter++;
+            return result;
+        }
+
+        $("#content > h3").each(function (idx) {
+        //$("#content > h2").each(function (idx) {
+
+            $current = $(this);
+
+            if($current){
+                var cid = "topic_" + $current.attr("id")
+                var $topic = $('<div></div>').attr("id", cid).addClass("topic");
+
+                var options = {
+                    container   : "#" + cid,
+                    site_key    : '<%= @data['juvia_key'] %>',
+                    topic_key   : location.pathname + "#" + $current.attr("id"),
+                    topic_url   : location.origin + location.pathname + "#" + $current.attr("id"),
+                    topic_title : $current.text(),
+                    include_base: !window.Juvia,
+                    include_css : !window.Juvia
+                };
+
+                $current.nextAll().each(function() {
+                    if(jQuery.inArray(this.tagName, ['H1','H2','H3','FOOTER']) > -1 ){
+                    //if(jQuery.inArray(this.tagName, ['H1','H2','FOOTER']) > -1 ){
+                        $topic.insertBefore($(this));
+
+                        var $link = $('<a href="">Fragen zu ' + $current.text() + '?</a>').addClass("feedback");
+
+                        $link.bind("click.feedback", function(ev){
+
+                            var s       = document.createElement('script');
+                            s.async     = true;
+                            s.type      = 'text/javascript';
+                            s.className = 'juvia';
+                            s.src       = makeApiUrl(options);
+                            (document.getElementsByTagName('body')[0]).appendChild(s);
+
+                            console.log("=====");
+                            console.log(location.pathname + "#" + $current.attr("id"));
+                            console.log(location.origin + location.pathname + "#" + $current.attr("id"));
+                            console.log($current.text());
+
+                            ev.preventDefault();
+                            $link.unbind("click.feedback");
+                            $link.bind("click.loading", function(ev){ev.preventDefault();});
+                            $link.addClass("loading");
+                            $topic.addClass("extended");
+                        });
+
+                        $link.appendTo($topic);
+
+                        return false; // stop execution
+                    }
+                });
+
+            }
+
+        });
+
+        <% end %>
+
     });
 
 </script>
