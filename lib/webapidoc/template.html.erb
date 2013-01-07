@@ -31,7 +31,7 @@
   <script src="./js/lodash.min.js"></script>
 
   <!-- Ace Code Editor -->
-  <% if @data["url"].present? %>
+  <% if @data["host"].present? %>
       <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <% end %>
 
@@ -83,7 +83,7 @@
 <script>
     $(document).ready(function () {
 
-        <% if @data["url"].present? %>
+        <% if @data["host"].present? %>
         $("#content > pre > code").each(function (idx) {
 
 
@@ -118,7 +118,7 @@
 
             var getResponse = function (e) {
                 var query = editor.getValue();
-                var url = "<%= @data['url'] %>";
+                var url = "<%= @data['host'] %>/<%= @data['params'] %>";
 
 
                 /* give some visual feedback */
