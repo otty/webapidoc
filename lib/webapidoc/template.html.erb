@@ -225,7 +225,7 @@
                             ev.preventDefault();
                             $link.unbind("click.feedback");
                             $link.bind("click.loading", function(ev){ev.preventDefault();});
-                            $link.addClass("loading");
+                            $link.html("Lade...").addClass("loading");
                             $topic.addClass("extended");
                         });
 
