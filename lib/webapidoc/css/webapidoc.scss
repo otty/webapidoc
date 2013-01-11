@@ -450,7 +450,6 @@ ul {
 #nav {
 
   background:transparent;
-  padding: 16px;
 
   min-height: 100%;
   position: relative;
@@ -478,15 +477,20 @@ ul {
 
     margin: 0;
     margin-top: 42px;
-    text-align: right;
+    text-align: left;
 
     > li {
 
       &.nav-item {
 
+
         &.level1 {
           margin-top:24px;
           margin-bottom: 0px;
+
+          background-color: white;
+
+          padding-left: 6%;
 
           > a {
             font-family:$sans;
@@ -499,6 +503,8 @@ ul {
         &.level2 {
           padding-top:0px;
 
+          padding-left: 12%;
+
           > a {
             font-family:$sans;
             font-size:14px;
@@ -510,6 +516,8 @@ ul {
 
         &.level3 {
           padding-top:0px;
+
+          padding-left: 18%;
 
           > a {
             position:relative;
@@ -562,7 +570,7 @@ p.version {
 
   min-height: 100%;
   position: absolute;
-  left: 25%;
+  left: 20%;
 }
 /* #Code Styles
 ================================================== */
